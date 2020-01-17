@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t maulik/react-test -f ./client/Dockerfile.dev ./client
+
+scripts:
+  - docker run maulik/react-test npm run test -- --coverage
+
+after_success:
+  - docker build -t maulik/multi-client ./client
+  - docker build -t maulik/multi-nginx ./nginx
+  - docker build -t maulik/multi-server ./server
+  - docker build -t maulik/multi-worker ./worker
+
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+- docker push maulik/multi-client
+- docker push maulik/multi-nginx
+- docker push maulik/multi-server
+- docker push maulik/multi-worker
