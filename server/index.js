@@ -23,7 +23,7 @@ const pgClient = new Pool({
 pgClient.on("error", () => console.log("Lost PG conn..."));
 
 pgClient
-  .query("CREATE TABLE IF NOT EXIST values (number INT)")
+  .query("CREATE TABLE IF NOT EXISTS values (number INT)")
   .catch(err => console.log(err));
 
 // redis
@@ -43,9 +43,15 @@ const redisPublisher = redisClient.duplicate();
 app.get("/health", (req, res) => res.send("ok"));
 
 app.get("/values/all", async (req, res) => {
-  const values = await pgClient.query("SELECT * FROM VALUES");
+  console.log("in here");
+  try {
+    const values = await pgClient.query("SELECT * FROM values");
 
-  res.send(values.rows);
+    res.send(values.rows);
+  } catch (err) {
+    console.log("Error Occured!", err);
+    res.send(err);
+  }
 });
 
 app.get("/values/current", async (req, res) => {
