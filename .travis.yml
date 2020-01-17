@@ -6,7 +6,7 @@ before_install:
   - docker build -t maulik/react-test -f ./client/Dockerfile.dev ./client
 
 scripts:
-  - docker run maulik/react-test npm run test -- --coverage
+  - docker run maulik/react-test npm run test
 
 after_success:
   - docker build -t maulik/multi-client ./client
