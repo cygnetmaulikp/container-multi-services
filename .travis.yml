@@ -14,9 +14,9 @@ after_success:
   - docker build -t maulik/multi-server ./server
   - docker build -t maulik/multi-worker ./worker
 
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-- docker push maulik/multi-client
-- docker push maulik/multi-nginx
-- docker push maulik/multi-server
-- docker push maulik/multi-worker
+  - docker push maulik/multi-client
+  - docker push maulik/multi-nginx
+  - docker push maulik/multi-server
+  - docker push maulik/multi-worker
