@@ -1,0 +1,4 @@
+username: postgres
+pass: postgrespassword
+fbname: fibvalues
+groupname: multi-docker
