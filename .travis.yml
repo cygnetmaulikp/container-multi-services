@@ -9,14 +9,14 @@ script:
   - docker run maulik/react-test npm run test --coverage
 
 after_success:
-  - docker build -t maulik/multi-client ./client
-  - docker build -t maulik/multi-nginx ./nginx
-  - docker build -t maulik/multi-server ./server
-  - docker build -t maulik/multi-worker ./worker
+  - docker build -t maulik1991/multi-client ./client
+  - docker build -t maulik1991/multi-nginx ./nginx
+  - docker build -t maulik1991/multi-server ./server
+  - docker build -t maulik1991/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker push maulik/multi-client
-  - docker push maulik/multi-nginx
-  - docker push maulik/multi-server
-  - docker push maulik/multi-worker
+  - docker push maulik1991/multi-client
+  - docker push maulik1991/multi-nginx
+  - docker push maulik1991/multi-server
+  - docker push maulik1991/multi-worker
