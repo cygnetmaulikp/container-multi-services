@@ -25,7 +25,9 @@ class Fib extends React.Component {
   fetchIndexes = async () => {
     try {
       const { data } = await axios.get("/api/values/all");
-      this.setState({ seenIndexes: data });
+      if (Array.isArray(data)) {
+        this.setState({ seenIndexes: data });
+      }
     } catch (error) {
       this.setState({ seenIndexes: [] });
     }
