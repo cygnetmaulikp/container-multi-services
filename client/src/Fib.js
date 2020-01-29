@@ -32,7 +32,14 @@ class Fib extends React.Component {
   };
 
   renderSeenIndexes = () => {
-    return this.state.seenIndexes.map(({ number }) => number).join(",");
+    if (
+      Array.isArray(this.state.seenIndexes) &&
+      this.state.seenIndexes &&
+      this.state.seenIndexes.length
+    ) {
+      return this.state.seenIndexes.map(({ number }) => number).join(",");
+    }
+    return [];
   };
 
   renderValues = () => {
